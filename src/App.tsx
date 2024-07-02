@@ -1,8 +1,14 @@
 // import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from "./pages/Home";
+import HomePage from "./pages/Home";
+import AboutPage from "./pages/About";
+import FrendsPage from "./pages/Frends";
+import TaskPage from "./pages/Tasks";
+
+
 import AppLayout from "./AppLayout"
+
 import NoPage from "./pages/NoPage"
 
 function App() {
@@ -12,9 +18,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AppLayout />}>
-          <Route index element={<Home />} />
-          {/* <Route path="blogs" element={<Blogs />} /> */}
-          {/* <Route path="contact" element={<Contact />} /> */}
+          <Route index element={<HomePage />} />
+          <Route path="airdrop" element={<AboutPage />} />
+          <Route path="frend" element={<FrendsPage />} />
+          <Route path="tasks" element={<TaskPage />} />
+
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
