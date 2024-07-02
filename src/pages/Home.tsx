@@ -32,7 +32,7 @@ function MyTimer({ expiryTimestamp }) {
             <span disabled hidden={ClaimHandler() === false} className="text-xs  bg-blue-500 rounded-full text-white px-4 py-1.5 me-3" onClick={() => {
                 // Restarts to 5 minutes timer
                 const time = new Date();
-                time.setSeconds(time.getSeconds() + 480);
+                time.setSeconds(time.getSeconds() + 20);
                 restart(time)
             }}>
                 Claim
@@ -50,7 +50,7 @@ function MyTimer({ expiryTimestamp }) {
 const HomePage = () => {
     const Ltime = localStorage.getItem('timem')
     const time = new Date();
-    time.setSeconds(time.getSeconds() + 480)
+    time.setSeconds(time.getSeconds() + 20)
 
     // console.log(time);
 
