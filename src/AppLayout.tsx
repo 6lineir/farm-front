@@ -5,6 +5,8 @@ import AppFooter from "./components/AppFooter"
 
 import WebApp from '@twa-dev/sdk'
 
+
+
 WebApp.ready();
 WebApp.expand();
 WebApp.enableClosingConfirmation();
@@ -13,6 +15,7 @@ console.log(WebApp);
 
 
 const AppLayout = () => {
+
     return (
         <>
             <div className="dark mainCl">
