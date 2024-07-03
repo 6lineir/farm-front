@@ -9,8 +9,11 @@ const HomePage = () => {
     const set_seconds = 100
     const score_farm_max = parseFloat(0.100) * User_Level
     const [FarmMax, setFarmMax] = useState(parseFloat(score_farm_max));
-    const Ltime = localStorage.getItem('timem')
+    // const Ltime = localStorage.getItem('timem')
+    // console.log(localStorage.getItem('timem'));
+    
     const time = new Date();
+
     const {
         totalSeconds,
         seconds,
@@ -49,6 +52,7 @@ const HomePage = () => {
         setFarmModal(false)
 
         const time = new Date();
+        localStorage.setItem('timem', time)
 
         time.setSeconds(time.getSeconds() + set_seconds);
         restart(time)
