@@ -1,11 +1,11 @@
 const FrendsPage = () => {
     return (
-        <div className="h-[89.89dvh] bg-gray-900 dark:bg-gray-900 text-center justify-center ">
+        <div className="h-[100vh] bg-gray-900 dark:bg-gray-900 text-center justify-center ">
             <h1 className="mb-2 text-gray-200 text-lg font-semibold ">
 
                 Reffrall Frends
             </h1>
-            <div className="mx-3 max-w-sm p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div className="mx-3 p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
                     <h5 className="mb-2 text-md font-bold dark:text-white">User Level Farming</h5>
                 </a>

@@ -3,12 +3,12 @@ import { useTimer } from 'react-timer-hook';
 import { useState, useEffect } from 'react'
 
 const HomePage = () => {
-    const [Coin, setCoin] = useState(parseFloat(2));
     const [FarmModal, setFarmModal] = useState(true);
-    const User_Level = 3
-    const set_seconds = 30
-    const score_farm_add = parseFloat(0.0001)
+    const [Coin, setCoin] = useState(parseFloat(2));
+    const User_Level = 2
+    const set_seconds = 100
     const score_farm_max = parseFloat(0.100) * User_Level
+    const [FarmMax, setFarmMax] = useState(parseFloat(score_farm_max));
     const Ltime = localStorage.getItem('timem')
     const time = new Date();
     const {
@@ -37,8 +37,14 @@ const HomePage = () => {
         setFarmModal(true)
 
     }
+    const LiveFarm = () => {
+        if (totalSeconds != 0) {
+            return (
+                parseFloat(FarmMax / totalSeconds).toFixed(4)
+            )
 
-
+        } else { return (parseFloat(0.0001)) }
+    }
     const ClaimHandler = () => {
         setFarmModal(false)
 
@@ -57,9 +63,9 @@ const HomePage = () => {
     }
 
     return (
-        <div className="h-[89.89dvh] bg-gradient-to-r from-sky-800 to-indigo-500 bg-cover bg-center  text-center justify-center ">
+        <div className="h-screen bg-gradient-to-r from-sky-800 to-indigo-500 bg-cover bg-center  text-center justify-center ">
 
-            <div className="mx-3 p-2 bg-white border border-gray-200 rounded-xl shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 rounded-full">
+            <div className="x-3 p-2 bg-white border border-gray-200 rounded-xl shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 rounded-full">
                 <p className="dark:text-gray-100">
                     Level:
                     <span className='text-gray-300 font-bold ml-1'>{LevelName()}</span>
@@ -106,7 +112,9 @@ const HomePage = () => {
                     </div>
 
 
-                    <span className="text-sm font-medium">Farm 0.0020 {totalSeconds}</span>
+                    <span className="text-sm font-medium">Farm
+                        <code className='mx-1'>{LiveFarm()}</code>
+                    </span>
 
                 </div>
             </div>
@@ -116,12 +124,12 @@ const HomePage = () => {
                     <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
                         <button type="button" className="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                             onClick={() => { ScoreHandler() }}>
-                            <img src="/public/icon1/close.svg" className='w-[30px]' />
+                            <img src="/icon1/close.svg" className='w-[30px]' />
                             <span className="sr-only">Close modal</span>
                         </button>
                         <div className="p-4 md:p-5 text-center">
 
-                            <img src="/public/icon1/coin.svg" className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
+                            <img src="/icon1/coin.svg" className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
                             <h3 className="mb-2 text-lg font-normal text-gray-500 dark:text-gray-400">
                                 You have entered the amount of:
                             </h3>

@@ -13,6 +13,7 @@ user_object = {
     "username": "usr",
     "frends": [0,1,2],
     "coin": 1000,
+    "level": 1
     
 }
 

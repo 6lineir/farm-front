@@ -6,6 +6,7 @@ import AboutPage from "./pages/About";
 import FrendsPage from "./pages/Frends";
 import TaskPage from "./pages/Tasks";
 
+
 import LoadingPage from "./pages/Loading";
 
 import AppLayout from "./AppLayout"
@@ -22,7 +23,7 @@ function App() {
       setIsLoading(false);
     }, 2000);
   }, []);
-  console.log(isLoading);
+  // console.log(isLoading);
 
   return (
     <BrowserRouter>
