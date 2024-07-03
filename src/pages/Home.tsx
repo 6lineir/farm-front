@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react'
 const HomePage = () => {
     const [Coin, setCoin] = useState(parseFloat(2));
     const [FarmModal, setFarmModal] = useState(true);
-    const User_Level = 2
-    const Ltime = localStorage.getItem('timem')
-    const time = new Date();
+    const User_Level = 3
     const set_seconds = 30
     const score_farm_add = parseFloat(0.0001)
-    const score_farm_max = parseFloat(0.200) * User_Level
+    const score_farm_max = parseFloat(0.100) * User_Level
+    const Ltime = localStorage.getItem('timem')
+    const time = new Date();
     const {
         totalSeconds,
         seconds,
@@ -23,17 +23,13 @@ const HomePage = () => {
         resume,
         restart,
     } = useTimer({ time, onExpire: () => console.warn('onExpire called') });
-
     time.setSeconds(time.getSeconds() + set_seconds)
-    console.log(Ltime);
-    // if (totalSeconds !== 0) {
 
-    //     console.log("intervav");
-
-
-
-    //     console.log("Scc: ", totalSeconds)
-    // }
+    const LevelName = () => {
+        if (User_Level == 1) return "Bronze"
+        if (User_Level == 2) return "Silver"
+        if (User_Level == 3) return "Gold"
+    }
     const ScoreHandler = () => {
         const newCoin = parseFloat(Coin) + score_farm_max
         setCoin(newCoin)
@@ -63,8 +59,11 @@ const HomePage = () => {
     return (
         <div className="h-[89.89dvh] bg-gradient-to-r from-sky-800 to-indigo-500 bg-cover bg-center  text-center justify-center ">
 
-            <div className="mx-3 p-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 rounded-full">
-                <p className="dark:text-gray-100">Time Level: 1</p>
+            <div className="mx-3 p-2 bg-white border border-gray-200 rounded-xl shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 rounded-full">
+                <p className="dark:text-gray-100">
+                    Level:
+                    <span className='text-gray-300 font-bold ml-1'>{LevelName()}</span>
+                </p>
             </div>
 
             <div className="inline-flex justify-between text-gray-200 mt-2 text-lg font-bold text-center items-center justify-center">
@@ -73,22 +72,21 @@ const HomePage = () => {
                     {Coin.toFixed(2)}
                 </p>
             </div>
-            <div className="flex text-center items-center justify-center my-4">
+            <div className="flex text-center items-center justify-center my-2">
                 <img src="/Avatar-CakeSwap.png" className="w-[200px] " alt="Farm TonCakeSwap Logo" />
             </div>
             <div className="mt-12">
                 <p className='text-gray-300 text-xs font-bold my-2'>
                     Max Farm:
 
-                    <span className="bg-gray-300 text-gray-800 text-xs font-medium px-2.5 ml-1 py-0.5 rounded dark:text-gray-800">{score_farm_max.toFixed(3)}</span>
-
-
-
+                    <span className="bg-gray-300 text-gray-800 text-xs font-medium px-2.5 ml-1 py-0.5 rounded dark:text-gray-800">
+                        {score_farm_max.toFixed(2)}
+                    </span>
                 </p>
-                <p className='text-gray-300 font-bold my-2'>
+                <p className='text-gray-300 text-sm font-bold my-2'>
                     {totalSeconds !== 0 ? 'Farming...' : 'Not running'}
                 </p>
-                <div href="#" className="inline-flex justify-between items-center py-1 px-1 pe-4 mb-7 text-sm text-blue-700 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800">
+                <div className="inline-flex justify-between items-center py-1 px-1 pe-4 mb-7 text-sm text-blue-700 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800">
 
                     <div className='inline-flex justify-between items-center mr-3 '>
 
