@@ -1,7 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useTimer } from 'react-timer-hook';
+import { useState, useEffect } from 'react'
 
-function MyTimer({ expiryTimestamp }) {
+const HomePage = () => {
+    const [Coin, setCoin] = useState(parseFloat(2));
+    const [FarmModal, setFarmModal] = useState(true);
+    const User_Level = 2
+    const Ltime = localStorage.getItem('timem')
+    const time = new Date();
+    const set_seconds = 30
+    const score_farm_add = parseFloat(0.0001)
+    const score_farm_max = parseFloat(0.200) * User_Level
     const {
         totalSeconds,
         seconds,
@@ -13,46 +22,43 @@ function MyTimer({ expiryTimestamp }) {
         pause,
         resume,
         restart,
-    } = useTimer({ expiryTimestamp, onExpire: () => console.warn('onExpire called') });
+    } = useTimer({ time, onExpire: () => console.warn('onExpire called') });
+
+    time.setSeconds(time.getSeconds() + set_seconds)
+    console.log(Ltime);
+    // if (totalSeconds !== 0) {
+
+    //     console.log("intervav");
+
+
+
+    //     console.log("Scc: ", totalSeconds)
+    // }
+    const ScoreHandler = () => {
+        const newCoin = parseFloat(Coin) + score_farm_max
+        setCoin(newCoin)
+        console.log(newCoin);
+        setFarmModal(true)
+
+    }
+
 
     const ClaimHandler = () => {
-        if (hours == 0 && minutes == 0 && seconds == 0) {
-            console.log(minutes);
+        setFarmModal(false)
+
+        const time = new Date();
+
+        time.setSeconds(time.getSeconds() + set_seconds);
+        restart(time)
+        if (totalSeconds == 0) {
+
+            console.warn("=== End Time ===");
+
             return true
 
         } else return false
 
     }
-    // ClaimHandler()
-
-
-    return (
-        <div className='inline-flex justify-between items-center mr-3 '>
-
-            <span disabled hidden={ClaimHandler() === false} className="text-xs  bg-blue-500 rounded-full text-white px-4 py-1.5 me-3" onClick={() => {
-                // Restarts to 5 minutes timer
-                const time = new Date();
-                time.setSeconds(time.getSeconds() + 20);
-                restart(time)
-            }}>
-                Claim
-            </span>
-            <div className='pl-2 dark:text-blue-300 justify-center items-center align-center' style={{ textAlign: 'center' }}>
-                <div >
-                    <span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
-                </div>
-                {/* <p>{isRunning ? 'Running' : 'Not running'}</p> */}
-
-            </div>
-        </div>
-    );
-}
-const HomePage = () => {
-    const Ltime = localStorage.getItem('timem')
-    const time = new Date();
-    time.setSeconds(time.getSeconds() + 20)
-
-    // console.log(time);
 
     return (
         <div className="h-[89.89dvh] bg-gradient-to-r from-sky-800 to-indigo-500 bg-cover bg-center  text-center justify-center ">
@@ -61,25 +67,80 @@ const HomePage = () => {
                 <p className="dark:text-gray-100">Time Level: 1</p>
             </div>
 
-            <div className="inline-flex justify-between text-gray-200 mt-4 text-lg font-bold text-center items-center justify-center">
+            <div className="inline-flex justify-between text-gray-200 mt-2 text-lg font-bold text-center items-center justify-center">
+                <img src="/cakeswap-logo-fix500.png" className="w-[30px] mr-1" alt="Farm TonCakeSwap Logo" />
                 <p>
-                    <img src="/cakeswap-logo-fix500.png" className="w-[50px] " alt="Farm TonCakeSwap Logo" /><span> 000.00</span>
+                    {Coin.toFixed(2)}
                 </p>
             </div>
-            <div className="flex text-center items-center justify-center my-5">
+            <div className="flex text-center items-center justify-center my-4">
                 <img src="/Avatar-CakeSwap.png" className="w-[200px] " alt="Farm TonCakeSwap Logo" />
             </div>
             <div className="mt-12">
+                <p className='text-gray-300 text-xs font-bold my-2'>
+                    Max Farm:
+
+                    <span className="bg-gray-300 text-gray-800 text-xs font-medium px-2.5 ml-1 py-0.5 rounded dark:text-gray-800">{score_farm_max.toFixed(3)}</span>
+
+
+
+                </p>
+                <p className='text-gray-300 font-bold my-2'>
+                    {totalSeconds !== 0 ? 'Farming...' : 'Not running'}
+                </p>
                 <div href="#" className="inline-flex justify-between items-center py-1 px-1 pe-4 mb-7 text-sm text-blue-700 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800">
 
+                    <div className='inline-flex justify-between items-center mr-3 '>
 
-                    <MyTimer expiryTimestamp={time} />
+                        <span hidden={totalSeconds !== 0} className="text-md  bg-blue-500 rounded-full text-white px-4 py-1.5 me-3" onClick={ClaimHandler}>
+                            Claim
+                        </span>
+                        <span hidden={totalSeconds == 0} className="text-md  bg-gray-500 rounded-full text-white px-4 py-1.5 me-3" >
+                            Claim
+                        </span>
+                        <div className='pl-2 text-blue-300  dark:text-blue-300 justify-center items-center align-center font-bold text-md' style={{ textAlign: 'center' }}>
+                            <div >
+                                <span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+                            </div>
 
 
-                    <span className="text-sm font-medium">Farm 0.0045</span>
+                        </div>
+                    </div>
+
+
+                    <span className="text-sm font-medium">Farm 0.0020 {totalSeconds}</span>
 
                 </div>
             </div>
+
+            <div id="claim-modal" hidden={FarmModal} className=" overflow-y-auto overflow-x-hidden  fixed bottom-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-15rem)] max-h-full shadow">
+                <div className="relative p-4 w-full max-w-md max-h-full">
+                    <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <button type="button" className="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            onClick={() => { ScoreHandler() }}>
+                            <img src="/public/icon1/close.svg" className='w-[30px]' />
+                            <span className="sr-only">Close modal</span>
+                        </button>
+                        <div className="p-4 md:p-5 text-center">
+
+                            <img src="/public/icon1/coin.svg" className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
+                            <h3 className="mb-2 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                You have entered the amount of:
+                            </h3>
+                            <p className='mb-5 text-lg font-bold text-gray-300'>
+
+                                +{score_farm_max.toFixed(3)}
+
+                            </p>
+                            <button onClick={() => { ScoreHandler() }} type="button" className="text-white bg-green-400 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300  font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                Yes, Claim
+                            </button>
+                            <button type="button" className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Farm More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     )
 }

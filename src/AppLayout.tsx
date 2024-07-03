@@ -23,6 +23,9 @@ const AppLayout = () => {
     //         username: WA_user.username,
     //         is_premium: WA_user.is_premium,
     //         first_name: WA_user.first_name
+    //         frends: [01,02],
+    //         coin: 100,
+    //            
     //     }
     //     console.log(user_object);
 
