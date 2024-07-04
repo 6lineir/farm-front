@@ -14,7 +14,7 @@ import WebApp from '@twa-dev/sdk'
 WebApp.ready();
 WebApp.expand();
 WebApp.enableClosingConfirmation();
-// console.log(WebApp);
+console.log(WebApp);
 
 
 
