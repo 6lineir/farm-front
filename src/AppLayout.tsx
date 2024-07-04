@@ -20,7 +20,9 @@ console.log(WebApp.initDataUnsafe);
 
 const AppLayout = () => {
     // if (WebApp)
-    console.log(WebApp);
+    console.log(WebApp.platform);
+    console.log(WebApp.platform);
+    console.log(WebApp.platform);
 
     //NOTE - If For Run in Telegram 
     if (WebApp.initData != "") {
