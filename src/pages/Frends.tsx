@@ -1,3 +1,5 @@
+import ReferralShare from "./../components/ReferralShare"
+
 const FrendsPage = () => {
     return (
         <div className="h-[100vh] bg-gray-900 dark:bg-gray-900 text-center justify-center ">
@@ -5,6 +7,7 @@ const FrendsPage = () => {
 
                 Reffrall Frends
             </h1>
+            <ReferralShare />
             <div className="mx-3 p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
                     <h5 className="mb-2 text-md font-bold dark:text-white">User Level Farming</h5>
