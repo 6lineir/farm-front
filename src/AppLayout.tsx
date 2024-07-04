@@ -16,7 +16,7 @@ WebApp.expand();
 WebApp.enableClosingConfirmation();
 console.log(WebApp);
 
-
+console.log(WebApp.initDataUnsafe);
 
 const AppLayout = () => {
     // if (WebApp.initDataUnsafe) {
