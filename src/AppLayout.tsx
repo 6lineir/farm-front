@@ -19,23 +19,25 @@ console.log(WebApp);
 console.log(WebApp.initDataUnsafe);
 
 const AppLayout = () => {
-    // if (WebApp.initDataUnsafe) {
-    //     const WA_user = WebApp.initDataUnsafe.user
-    //     console.log(WA_user);
-    //     const user_object = {
-    //         user_id: WA_user.id,
-    //         username: WA_user.username,
-    //         is_premium: WA_user.is_premium,
-    //         first_name: WA_user.first_name
-    //         frends: [01,02],
-    //         coin: 100,
-    //            
-    //     }
-    //     console.log(user_object);
+    // if (WebApp)
+    console.log(WebApp);
 
+    //NOTE - If For Run in Telegram 
+    if (WebApp.initData != "") {
+        const WA_user = WebApp.initDataUnsafe.user
+        console.log(WA_user);
+        const user_object = {
+            user_id: WA_user.id,
+            username: WA_user.username,
+            is_premium: WA_user.is_premium,
+            first_name: WA_user.first_name,
+            frends: [1, 2],
+            coin: 100,
 
-    //     //NOTE - End WebApp Telegram Func
-    // }
+        }
+        console.log(user_object);
+        //NOTE - End WebApp Telegram Func
+    }
     return (
         <>
             <div className="dark mainCl">
