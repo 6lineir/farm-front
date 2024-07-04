@@ -83,7 +83,7 @@ const HomePage = () => {
                 </p>
             </div>
             <div className="flex text-center items-center justify-center my-2">
-                <img src="/Avatar-CakeSwap.png" className="w-[200px] " alt="Farm TonCakeSwap Logo" />
+                <img src="/TONCakeSwap.png" className="w-[200px] mt-3" alt="Farm TonCakeSwap Logo" />
             </div>
             <div className="mt-12">
                 <p className='text-gray-300 text-xs font-bold my-2'>
