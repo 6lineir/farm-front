@@ -88,7 +88,7 @@ const FrendsPage = () => {
 
 
             <div className="mx-4 mt-2 text-left">
-                <ul className="max-w-md divide-y  divide-gray-200 dark:divide-gray-700">
+                <ul className="divide-y  divide-gray-200 dark:divide-gray-700">
                     <li className="pb-3 sm:pb-4">
                         <div className="flex items-center space-x-4 rtl:space-x-reverse">
                             <div className="flex-shrink-0">

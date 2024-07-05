@@ -1,10 +1,11 @@
+
 import redis
 import json
 
 
 FRDIS = redis.StrictRedis(host='127.0.0.1',
                          port="6379",
-                         db="3",
+                         db="4",
                         #  username=RDIS_USER,
                         #  password=RDIS_PASS,
                          decode_responses=True)
@@ -22,7 +23,9 @@ def Get_RDIS(key):
     if hasOn == 1:
         geter = FRDIS.get(key)
         return json.loads(geter)
-    else: print(f'??? Not Fond FRDIS Get {key}')
+    else: 
+        # print(f'??? Not Fond FRDIS Get {key}')
+        return None
     
 
 
