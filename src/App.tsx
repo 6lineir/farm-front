@@ -30,6 +30,8 @@ function App() {
 
   //NOTE - If For Run in Telegram
   if (WebApp.initData != "") {
+    console.log("==PARAMS=:",WebApp.initDataUnsafe);
+    
     const WA_user = WebApp.initDataUnsafe.user;
     console.log(WA_user);
     const user_object = {
