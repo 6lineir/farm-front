@@ -16,7 +16,6 @@ import AppLayout from "./AppLayout";
 import NoPage from "./pages/NoPage";
 import NotDekstop from "./pages/NotDekstop";
 
-
 //LINK - init SDK Telegram Mini App
 WebApp.ready();
 WebApp.expand();
@@ -25,27 +24,28 @@ console.log(WebApp);
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+
+  //NOTE - If For Run in Telegram
   // if (WebApp)
   console.log(WebApp.platform);
 
-  //NOTE - If For Run in Telegram
   if (WebApp.initData != "") {
-    
-    console.log("==PARAMS=:",WebApp.initDataUnsafe.start_param);
-    
+    console.log("==PARAMS=:", WebApp.initDataUnsafe.start_param);
+
     const WA_user = WebApp.initDataUnsafe.user;
-    console.log(WA_user);
-    const user_object = {
+    // console.log(WA_user);
+
+    const reg_user_object = {
       user_id: WA_user.id,
       username: WA_user.username,
-      is_premium: WA_user.is_premium,
       first_name: WA_user.first_name,
-      frends: [1, 2],
-      coin: 100
+      last_name: WA_user.last_name,
+      invited_by: WebApp.initDataUnsafe.start_param | 0,
+      is_premium: WA_user.is_premium
     };
-    console.log(user_object);
-    //NOTE - End WebApp Telegram Func
+    console.log(reg_user_object);
   }
+  //NOTE - End WebApp Telegram Func
 
   useEffect(() => {
     // Simulate an API call
