@@ -4,24 +4,24 @@ const FrendsPage = () => {
   const userLevel = [
     {
       level: 1,
-      name:'Bronze',
+      name: "Bronze",
       apy: 1,
       friend: 3,
-      farm: 0.200
+      farm: 0.2
     },
     {
       level: 2,
-      name:'Silver',
+      name: "Silver",
       apy: 2,
       friend: 15,
-      farm: 0.400
+      farm: 0.4
     },
     {
       level: 3,
-      name:'Gold',
+      name: "Gold",
       apy: 3,
       friend: 30,
-      farm: 0.600
+      farm: 0.6
     }
   ];
   return (
@@ -56,8 +56,8 @@ const FrendsPage = () => {
           </thead>
           <tbody>
             {userLevel.map(i => {
-                return (
-                  <tr className="dark:bg-gray-800" key={i.name}>
+              return (
+                <tr className="dark:bg-gray-800" key={i.name}>
                   <th
                     scope="row"
                     className="px-1 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -155,27 +155,6 @@ const FrendsPage = () => {
                 $320
               </div>
             </div>
-            <li className="pb-3 sm:pb-4">
-            <div className="flex items-center space-x-4 rtl:space-x-reverse">
-              <div className="flex-shrink-0">
-                <img
-                  className="w-8 h-8 rounded-full"
-                  src="/Face-cakeswap.png"
-                  alt="Neil image"
-                />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                  Dev3
-                </p>
-                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                  1,000,000
-                </p>
-              </div>
-              <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                $320
-              </div>
-            </div>
           </li>
           <li className="pb-3 sm:pb-4">
             <div className="flex items-center space-x-4 rtl:space-x-reverse">
@@ -221,6 +200,27 @@ const FrendsPage = () => {
               </div>
             </div>
           </li>
+          <li className="pb-3 sm:pb-4">
+            <div className="flex items-center space-x-4 rtl:space-x-reverse">
+              <div className="flex-shrink-0">
+                <img
+                  className="w-8 h-8 rounded-full"
+                  src="/Face-cakeswap.png"
+                  alt="Neil image"
+                />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                  Dev3
+                </p>
+                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                  1,000,000
+                </p>
+              </div>
+              <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                $320
+              </div>
+            </div>
           </li>
         </ul>
       </div>

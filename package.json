@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@twa-dev/sdk": "^7.0.0",
+    "axios": "^1.7.2",
     "cors": "^2.8.5",
     "eruda": "^3.0.1",
     "express": "^4.19.2",
