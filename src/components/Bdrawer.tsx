@@ -3,10 +3,8 @@
 const Bdrawer = ({ Dshow, setDshow, count }) => {
   // const [DDshow, setDDshow] = useState(Dshow);
   const BTNDrawShowHndler = () => {
-    console.log("El Hid");
+    // console.log("El Hid");
     setDshow(true);
-
-    console.log("Dshow", Dshow);
   };
   return (
     <div>

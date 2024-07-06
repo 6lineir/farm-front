@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Bdrawer from "./../components/Bdrawer";
 
 const HomePage = () => {
-  const [FarmModal, setFarmModal] = useState(false);
+  const [FarmModal, setFarmModal] = useState(true);
   const [Coin, setCoin] = useState(parseFloat(6));
   const User_Level = 1;
   const set_seconds = 20;
