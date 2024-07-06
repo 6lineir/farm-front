@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User
+from .models import User ,Referral
 from django.utils import timezone
 
 # Register your models here.
@@ -15,6 +15,7 @@ class List_User(admin.ModelAdmin):
         "username",
         "first_name",
         "invited_by",
+        "is_premium",
         "is_online",
         "is_active",
         "admin_signtime",
@@ -24,3 +25,19 @@ class List_User(admin.ModelAdmin):
 
 
 admin.site.register(User, List_User)
+
+
+class List_Reff(admin.ModelAdmin):
+    def admin_signtime(self, obj):
+        return timezone.localtime(obj.inv_time).strftime("%Y-%m-%d ~ %I:%M")
+
+    ordering = ["-inv_time"]
+    list_display = (
+        "user_id",
+        "invited_id",
+        "is_active",
+        "admin_signtime",
+    )
+    search_fields = ["user_id", "invited_by"]
+
+admin.site.register(Referral, List_Reff)
