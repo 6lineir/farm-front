@@ -1,11 +1,10 @@
-import { useState } from "react";
+// import { useState } from "react";
 
-const Bdrawer = ({ Dshow }) => {
-  const [DDshow, setDDshow] = useState(Dshow);
+const Bdrawer = ({ Dshow, setDshow, count }) => {
+  // const [DDshow, setDDshow] = useState(Dshow);
   const BTNDrawShowHndler = () => {
     console.log("El Hid");
-    setDDshow(!Dshow);
-    console.log("DDshow", DDshow);
+    setDshow(true);
 
     console.log("Dshow", Dshow);
   };
@@ -37,7 +36,10 @@ const Bdrawer = ({ Dshow }) => {
           <span className="sr-only">Close menu</span>
         </button>
         <p className="text-center mb-6 text-lg font-bold text-gray-300">
-          <span className="text-yellow-300 font-bold text-xl">0.2</span> Farmed
+          <span className="text-yellow-300 font-bold text-xl">
+            {count}
+          </span>{" "}
+          Farmed
         </p>
         <a
           href="#"

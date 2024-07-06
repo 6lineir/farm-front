@@ -5,12 +5,12 @@ import { useState, useEffect } from "react";
 import Bdrawer from "./../components/Bdrawer";
 
 const HomePage = () => {
-  const [FarmModal, setFarmModal] = useState(true);
-  const [Coin, setCoin] = useState(parseFloat(2));
-  const User_Level = 2;
-  const set_seconds = 100;
+  const [FarmModal, setFarmModal] = useState(false);
+  const [Coin, setCoin] = useState(parseFloat(6));
+  const User_Level = 1;
+  const set_seconds = 20;
   const score_farm_max = parseFloat(0.1) * User_Level;
-  const [FarmMax, setFarmMax] = useState(parseFloat(score_farm_max));
+  const [FarmMax, setFarmMax] = useState(parseFloat(score_farm_max).toFixed(3));
   // const Ltime = localStorage.getItem('timem')
   // console.log(localStorage.getItem('timem'));
 
@@ -39,7 +39,7 @@ const HomePage = () => {
     const newCoin = parseFloat(Coin) + score_farm_max;
     setCoin(newCoin);
     console.log(newCoin);
-    setFarmModal(true);
+    // setFarmModal(false);
   };
   const LiveFarm = () => {
     if (totalSeconds != 0) {
@@ -50,7 +50,7 @@ const HomePage = () => {
   };
   const ClaimHandler = () => {
     setFarmModal(false);
-
+    ScoreHandler()
     const time = new Date();
     localStorage.setItem("timem", time);
 
@@ -58,7 +58,7 @@ const HomePage = () => {
     restart(time);
     if (totalSeconds == 0) {
       console.warn("=== End Time ===");
-
+      // setFarmModal(false);
       return true;
     } else return false;
   };
@@ -179,7 +179,7 @@ const HomePage = () => {
         </div>
       </div> 
       */}
-      <Bdrawer Dshow={FarmModal} />
+      <Bdrawer Dshow={FarmModal} setDshow={setFarmModal} count={FarmMax}/>
     </div>
   );
 };
