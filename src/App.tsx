@@ -30,7 +30,8 @@ function App() {
 
   //NOTE - If For Run in Telegram
   if (WebApp.initData != "") {
-    console.log("==PARAMS=:",WebApp.initDataUnsafe);
+    
+    console.log("==PARAMS=:",WebApp.initDataUnsafe.start_param);
     
     const WA_user = WebApp.initDataUnsafe.user;
     console.log(WA_user);
