@@ -24,6 +24,7 @@ const TaskPage = () => {
             <path stroke="currentColor" d="M1 5h12m0 0L9 1m4 4L9 9" />
           </svg>
         </a>
+        <br />
         <a
           href="https://t.me/TonCakeSwapCommunity"
           target="_blank"
@@ -40,6 +41,7 @@ const TaskPage = () => {
             <path stroke="currentColor" d="M1 5h12m0 0L9 1m4 4L9 9" />
           </svg>
         </a>
+        <br />
         <Link to="/">
           <div
             target="_blank"

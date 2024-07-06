@@ -7,3 +7,7 @@
     user-select: none;
 
 }
+
+.bdrw {
+    z-index: 1000;
+}

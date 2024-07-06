@@ -1,30 +1,46 @@
-"""
-URL configuration for backapi project.
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import include, path
 
 from ninja import NinjaAPI
 
+
+from ninja.errors import ValidationError
+
+from ninja.security import HttpBearer
+
+class AuthTokenBOT(HttpBearer):
+    def authenticate(self, request, token):
+        print("Auth TOKEN BOT ==> " + token)
+        if token == AUTH_TOKEN_BOT:
+            return token
+
+
+
+
 api = NinjaAPI()
+api = NinjaAPI(
+    openapi_extra={
+        "info": {
+            "termsOfService": "https://minestonecoin.com/terms/",
+        }
+    },
+    title="Mine Stone Coin MiniApp Game API",
+    description="This is a API RestFull with dynamic OpenAPI info section",
+)
 
 
-@api.get("/add")
-def add(request, a: int, b: int):
-    return {"result": a + b}
+@api.get("/")
+def server_info(request):
+    
+    return {"result": "OK"}
+
+
+@api.exception_handler(ValidationError)
+def custom_validation_errors(request, exc):
+    print(exc.errors)  # <--------------------- !!!!
+    return api.create_response(request, {"detail": exc.errors}, status=422)
+
 
 
 urlpatterns = [
@@ -32,3 +48,5 @@ urlpatterns = [
     path("api/", api.urls),
 ]
 
+admin.site.site_header = "TonCakeSwap Admin Panel"
+admin.site.site_title = "TonCakeSwap Panel Admin"
