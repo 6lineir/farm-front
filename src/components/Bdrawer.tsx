@@ -1,10 +1,13 @@
 import { useState } from "react";
 
-const Bdrawer = () => {
-  const [Dshow, setDshow] = useState(false);
+const Bdrawer = ({ Dshow }) => {
+  const [DDshow, setDDshow] = useState(Dshow);
   const BTNDrawShowHndler = () => {
     console.log("El Hid");
-    setDshow(true);
+    setDDshow(!Dshow);
+    console.log("DDshow", DDshow);
+
+    console.log("Dshow", Dshow);
   };
   return (
     <div>
@@ -17,14 +20,11 @@ const Bdrawer = () => {
           id="drawer-bottom-label"
           className="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"
         >
-          <svg
-            className="w-4 h-4 me-2.5"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-          </svg>Claimed Now Farm
+          <img
+            src="/icon1/coin.svg"
+            className="mx-auto mr-2 text-gray-400 w-8 h-8 dark:text-gray-200"
+          />
+          Claimed Now Farm
         </h5>
         <button
           type="button"
@@ -33,19 +33,11 @@ const Bdrawer = () => {
           className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white"
           onClick={BTNDrawShowHndler}
         >
-          <svg
-            className="w-3 h-3"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 14"
-          >
-            <path stroke="currentColor" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-          </svg>
+          <img src="/icon1/close.svg" className="w-[30px]" />
           <span className="sr-only">Close menu</span>
         </button>
         <p className="text-center mb-6 text-lg font-bold text-gray-300">
-          400 Farmed
+          <span className="text-yellow-300 font-bold text-xl">0.2</span> Farmed
         </p>
         <a
           href="#"

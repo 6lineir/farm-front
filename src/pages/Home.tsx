@@ -130,7 +130,7 @@ const HomePage = () => {
           </span>
         </div>
       </div>
-
+      {/* 
       <div
         id="claim-modal"
         hidden={FarmModal}
@@ -177,8 +177,9 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      </div>
-      <Bdrawer />
+      </div> 
+      */}
+      <Bdrawer Dshow={FarmModal} />
     </div>
   );
 };
