@@ -83,4 +83,4 @@ def get_User(request, user_id: int):
         #######################################
         return res_user
     else:
-        return 403, {"msg": "Error, User Not Access"}
+        return 403, {"msg": "Error,Not Access User"}

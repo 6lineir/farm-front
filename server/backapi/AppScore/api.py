@@ -26,8 +26,26 @@ def get_User_Score(request, user_id: int):
     if str(token) == str(user_id):
         # res_user = User.objects.get(pk=int(user_id))
         get_score = Score.objects.get(pk=int(user_id))
-        print(get_score)
+        # print(get_score)
         ################ Check ################
         return get_score
     else:
-        return 403, {"msg": "Error, User Not Access"}
+        return 403, {"msg": "Error,Not Access User in Score"}
+
+
+
+
+@router.put("/claim", tags=["MiniApp Users Score"], auth=AuthToken())
+def Update_User_Score(request, payload: Score_In):
+    token = request.headers.get("Authorization").split(" ")[-1]
+    get_user = User.objects.get(pk=int(token))
+    if get_user.is_active == False:
+        User.objects.filter(pk=int(token)).update(is_active=True)
+    get_score = Score.objects.get(pk=int(token))
+    ################ Func ################
+    try:
+        
+        return {"msg": f"Success, Update Score User {int(token)}"}
+    except Exception:
+        return {"msg": "Error"}
+    
