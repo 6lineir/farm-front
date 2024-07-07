@@ -13,7 +13,7 @@ from django.utils import timezone
 from utils.time_me import TimeNowUTC, TimeStamp
 from utils.redis_db import Set_RDIS, Get_RDIS
 
-
+test = "reeeee"
 router = Router()
 
 #! فانکشن هندل کردن افزودن امتیاز به دعوت کننده

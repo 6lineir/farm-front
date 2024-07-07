@@ -62,7 +62,7 @@ const FrendsPage = () => {
                     scope="row"
                     className="px-1 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    Bronze {i.name}
+                    {i.name}
                   </th>
                   <td className="px-1 py-2">
                     {i.apy}

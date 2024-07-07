@@ -67,9 +67,10 @@ def custom_validation_errors(request, exc):
 
 #? Add init Urls APis APP
 from AppUser.api import router as user_router
+from AppScore.api import router as score_router
 # Bot Users API
 api.add_router("/user/", user_router)
-# Bot Users API
+api.add_router("/score/", score_router)
 
 
 
