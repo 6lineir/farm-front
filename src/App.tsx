@@ -14,9 +14,7 @@ import LoadingPage from "./pages/Loading";
 
 import AppLayout from "./AppLayout";
 
-import ErrorPage from "./pages/ErrorPage";
 import NoPage from "./pages/NoPage";
-import NotDekstop from "./pages/NotDekstop";
 
 //LINK - init SDK Telegram Mini App
 WebApp.ready();
@@ -53,6 +51,7 @@ function App() {
       is_premium: WA_user.is_premium
     };
     console.log(reg_user_object);
+    localStorage.setItem('user_data',JSON.stringify(reg_user_object))
   }
   //NOTE - End WebApp Telegram Func
   //!SECTION
@@ -72,19 +71,84 @@ function App() {
   //     .then(data => data)
   //     .catch(error => error);
   // });
+
+  
+  
   //!SECTION
   useEffect(() => {
     // Simulate an API call
-
+    
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
+ //!SECTION
+ const Sing_User = async () => {
+  const LS_DATA = JSON.parse(localStorage.getItem('user_data'))
+  const options = {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: `Bearer ${"app123"}`
+    },
+    data: LS_DATA
+  };
+
+  const reg_user = await axios
+    .post(BASE_URL + `/api/user/create`, LS_DATA, options)
+    .then(data => console.log(data))
+    .catch(error => console.log(error));
+
+  console.warn("++++++++++++++++");
+  console.log(reg_user);
+  console.warn("++++++++++++++++");
+};
+//!SECTION
+    const RequestGetAPI =async ()=>{
+      const LS_DATA = JSON.parse(localStorage.getItem('user_data'))
+      
+      const options = {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+              Authorization: `Bearer ${LS_DATA.user_id}`
+            },
+            data: LS_DATA
+          }
+          console.log(options);
+          
+       const res =  await axios
+        .get(BASE_URL + `/api/user/get?user_id=${LS_DATA.user_id}`, options)
+        .then(data => data)
+        .catch(error =>error)
+        console.warn(res);
+        // IF: //
+        if(res.status == 200){
+          
+          console.warn("oooooOOOOoOooOOOoOk")
+          console.log(res);
+          
+        }
+        if(res.response.status == 401){
+          console.warn("Inja Register Bshe");
+          Sing_User()
+  
+          
+        }
+        // E IF //
+    }
+    RequestGetAPI()
+
   }, []);
   // console.log(isLoading);
   // if (WebApp.platform !== "unknown") {
     //   if (isError == true) {
     //     return <ErrorPage ecode="404" emsg="Not Found Page" />;
     return (
+      <>
         <BrowserRouter>
           <Routes>
             <Route
@@ -100,6 +164,7 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
+        </>
     );
     // }
   // } else return <NotDekstop />;
