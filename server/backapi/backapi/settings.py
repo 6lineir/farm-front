@@ -26,7 +26,17 @@ SECRET_KEY = 'django-insecure-0i09n%w7l$(vxzhhh3u)l=-5mwzp(f+sq5x!+udm$k%&9w2p*g
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ORIGIN_ALLOW_ALL = True 
+CORS_ALLOW_HEADERS = [ '*' ]
 
+# add this block below MIDDLEWARE
+# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = (
+    'http://127.0.0.1:3000',
+    'http://localhost:3000',
+    "https://engaged-gopher-desired.ngrok-free.app"
+)
 
 # Application definition
 
@@ -37,12 +47,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "corsheaders",
     # My Add
     "AppUser",
     "AppScore",
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # add this
+    "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

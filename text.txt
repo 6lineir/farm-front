@@ -1,0 +1,55 @@
+ //!SECTION
+    const Sing_User = async () => {
+      const options = {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${"app123"}`
+        },
+        data: reg_user_object
+      };
+
+      const reg_user = await axios
+        .post(BASE_URL + `/api/user/create`, reg_user_object, options)
+        .then(data => console.log(data))
+        .catch(error => console.log(error));
+
+      console.warn("++++++++++++++++");
+      console.log(reg_user);
+      console.warn("++++++++++++++++");
+    };
+    //!SECTION
+    //!SECTION
+    //!SECTION
+    const ReqAPI = async () => {
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json; charset=utf-8",
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${1}`
+        }
+      };
+      const res_userData = await axios.get(
+        BASE_URL + `/api/user/get?user_id=${1}`,
+        options
+      );
+      console.warn(res_userData);
+
+      // if (get_data == "ERR_BAD_REQUEST") {
+      //   console.log("Error");
+      // } else {
+      //   const get_score = await axios
+      //     .get(
+      //       BASE_URL + `/api/score/get?user_id=${reg_user_object.user_id}`,
+      //       options
+      //     )
+      //     .then(res => res)
+      //     .catch(error => error);
+      //   console.log(get_score);
+      // }
+    };
+    //!SECTION

@@ -3,7 +3,7 @@ from ninja import Router
 from .models import User, Referral
 from .schema import User_In, User_Out, Error
 from AppScore.models import Score
-
+from AppScore.schema import Score_Out
 from backapi.urls import AuthTokenBOT, AuthToken
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.http import JsonResponse
@@ -63,11 +63,12 @@ def create_User(request, payload: User_In):
     
     
 # دریافت اطلاعات کاربر از دیتابیس
-@router.get("/get", response={200: User_Out, 403: Error}, tags=["MiniApp Users"], auth=AuthToken())
+@router.get("/get", response={200: User_Out,401: Error, 403: Error}, tags=["MiniApp Users"], auth=AuthToken())
 def get_User(request, user_id: int):
     token = request.headers.get("Authorization").split(" ")[-1]
     if str(token) == str(user_id):
         res_user = User.objects.get(pk=int(user_id))
+        # res_score = Score.objects.get(pk=int(user_id))
         ################ Redis ################
         setObj = {
             "timestamp": TimeStamp(),
@@ -81,6 +82,6 @@ def get_User(request, user_id: int):
             #! اگر کاربر مینی اپ رو باز کنه فیلد انلاین اپدیت میشه
             User.objects.filter(pk=int(user_id)).update(is_online=True)
         #######################################
-        return res_user
+        return 200,res_user
     else:
         return 403, {"msg": "Error,Not Access User"}
