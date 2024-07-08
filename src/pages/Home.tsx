@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import Bdrawer from "./../components/Bdrawer";
 
-const HomePage = () => {
+const HomePage = ({ username }) => {
   const [FarmModal, setFarmModal] = useState(true);
   const [Coin, setCoin] = useState(parseFloat(6));
   const User_Level = 1;
@@ -50,7 +50,7 @@ const HomePage = () => {
   };
   const ClaimHandler = () => {
     setFarmModal(false);
-    ScoreHandler()
+    ScoreHandler();
     const time = new Date();
     localStorage.setItem("timem", time);
 
@@ -67,8 +67,13 @@ const HomePage = () => {
     <div className="h-screen bg-gradient-to-r from-sky-800 to-indigo-500 bg-cover bg-center  text-center justify-center ">
       <div className="x-3 p-2 bg-white border border-gray-200 rounded-xl shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 rounded-full">
         <p className="dark:text-gray-100">
-          Level:
-          <span className="text-gray-300 font-bold ml-1">{LevelName()}</span>
+          <span className="text-gray-200 text-sm">
+            👤( {username} )
+          </span>
+          <span className="text-gray-400 mx-1">|</span>
+          <span className="text-gray-300 font-bold ml-1">
+            🏆{LevelName()}
+          </span>
         </p>
       </div>
 
@@ -179,7 +184,7 @@ const HomePage = () => {
         </div>
       </div> 
       */}
-      <Bdrawer Dshow={FarmModal} setDshow={setFarmModal} count={FarmMax}/>
+      <Bdrawer Dshow={FarmModal} setDshow={setFarmModal} count={FarmMax} />
     </div>
   );
 };
