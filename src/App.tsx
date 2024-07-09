@@ -39,15 +39,10 @@ function App() {
 
   //!SECTION
   //!SECTION
-  // if (WebApp == "unknown")
-  // if (WebApp.platform == "unknown") {
-  // }
-  // console.log(WebApp.platform);
 
   //NOTE - If For Run in Telegram
   if (WebApp.initData !== "") {
-    console.log("==PARAMS=:", WebApp.initDataUnsafe.start_param);
-
+    // console.log("==PARAMS=:", WebApp.initDataUnsafe.start_param);
     const WA_user = WebApp.initDataUnsafe.user;
     // console.log(WA_user);
     const reg_user_object = {
@@ -58,8 +53,8 @@ function App() {
       invited_by: WebApp.initDataUnsafe.start_param | 0,
       is_premium: WA_user.is_premium
     };
-    console.log(reg_user_object);
     localStorage.setItem('user_data', JSON.stringify(reg_user_object))
+    // console.log(reg_user_object);
   }
   //NOTE - End WebApp Telegram Func
   //!SECTION
@@ -130,7 +125,6 @@ function App() {
       setErrorMSG("Server Is Offline")
       setLogin(false)
       setError(true)
-      console.log(error);
     }
     if (error !== null) {
       if (error.response.status == 401) {
