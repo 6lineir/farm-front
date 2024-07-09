@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import { useQuery } from "@tanstack/react-query";
 import WebApp from "@twa-dev/sdk";
 
 import AboutPage from "./pages/About";
@@ -63,15 +63,32 @@ function App() {
   }
   //NOTE - End WebApp Telegram Func
   //!SECTION
+  const LS_DATA = JSON.parse(localStorage.getItem('user_data'))
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: `Bearer ${LS_DATA.user_id}`
+    }
+  }
 
+  const { data, status, error, isRefetching } = useQuery({
+    queryKey: ["data_user"],
 
+    queryFn: () => {
+      return axios.get(BASE_URL + `/api/user/get?user_id=${LS_DATA.user_id}`, options);
+    },
+  });
+  console.warn("API CALL", data);
+  console.warn("API Status:", status);
+  console.error("API Error:", error);
   //!SECTION
-  useEffect(() => {
-    // Simulate an API call
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+
+
+  useEffect(() => {
     //!SECTION
     const Sing_User = async () => {
       const LS_DATA = JSON.parse(localStorage.getItem('user_data'))
@@ -85,55 +102,54 @@ function App() {
         },
         data: LS_DATA
       };
-
       const reg_user = await axios
         .post(BASE_URL + `/api/user/create`, LS_DATA, options)
-        .then(data => console.log(data))
-        .catch(error => console.log(error));
-
-      console.warn("++++++++++++++++");
-      console.log(reg_user);
-      console.warn("++++++++++++++++");
-    };
-    //!SECTION
-    const RequestGetAPI = async () => {
-      const LS_DATA = JSON.parse(localStorage.getItem('user_data'))
-
-      const options = {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          Authorization: `Bearer ${LS_DATA.user_id}`
-        },
-        // data: LS_DATA
-      }
-      console.log(options);
-
-      const res = await axios
-        .get(BASE_URL + `/api/user/get?user_id=${LS_DATA.user_id}`, options)
         .then(data => data)
         .catch(error => error)
-      console.warn(res);
-      console.warn("RESSS");
-      
+      // console.warn("++++++++++++++++");
+      // console.log(reg_user);
+      // console.warn("++++++++++++++++");
+    };
+    //!SECTION
 
-      // IF: //
-      if (res.status == 200) {
-        setLogin(true)
-        console.warn("oooooOOOOoOooOOOoOk")
-      }
-      if (res.response.status == 401) {
-        Sing_User() //!Info  Register User
-      }
-      if (res.code == "ERR_NETWORK"){
-        setError(true)
-      }
-      // E IF //
+
+
+
+    // Simulate an API call
+    if (status == 'success') {
+      setLogin(true)
+      setError(false)
     }
-    RequestGetAPI()
-  }, []);
+    if (status == 'pending') {
+      setLogin(false)
+      setError(false)
+      setIsLoading(true);
+    }
+    if (status == 'error') {
+      setErrorCODE("505")
+      setErrorMSG("Server Is Offline")
+      setLogin(false)
+      setError(true)
+      console.log(error);
+    }
+    if (error !== null) {
+      if (error.response.status == 401) {
+        //* //  Register Run // / / // / / / / / / / / / / /
+        setLogin(true)
+        Sing_User()
+        window.location.reload();
+      }
+    }
+
+    isRefetching ? setIsLoading(false) : setIsLoading(true)
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+
+
+
+  }, [error, isRefetching, status]);
   // console.log(isLoading);
   //   if (isError == true) {
   //     return <ErrorPage ecode="404" emsg="Not Found Page" />;
@@ -165,7 +181,7 @@ function App() {
           );
 
         } else return <SingPage />
-      }else return <ErrorPage ecode={ErrorCODE} emsg="Not Found Page" />
+      } else return <ErrorPage ecode={ErrorCODE} emsg={ErrorMSG} />
     } else return <NotDekstop />;
 
     //////////////////////main.tsx// }

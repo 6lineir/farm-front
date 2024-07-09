@@ -9,12 +9,11 @@ const ReferralShare = ({ linkBtn, ReffLink }) => {
                 <label className="text-sm font-medium text-gray-900 dark:text-white">Share Your Referral Link:</label>
             </div>
             <div className="flex items-center mb-3">
-                <span className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg dark:bg-gray-600 dark:text-white dark:border-gray-600">
+                <a href={linkBtn} className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-100 bg-blue-700 border border-blue-500 rounded-s-lg shadow-lg ">
 
+                    <span>Share Your Link</span>
 
-                    <a href={linkBtn} >Share Your Link</a>
-
-                </span>
+                </a>
                 <div className="relative w-full">
                     <input id="website-url" type="text" aria-describedby="helper-text-explanation" className="bg-gray-50 border border-e-0 border-gray-300 text-gray-500 dark:text-gray-400 text-sm border-s-0 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={ReffLink} disabled />
                 </div>
