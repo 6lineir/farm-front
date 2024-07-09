@@ -13,7 +13,7 @@ const NotDekstop = () => {
 
 
             <div className="flex text-center items-center justify-center mt-4">
-                <img src="/public/qr-bot.png" className="w-[250px]" />
+                <img src="/public/qr-bot.png" className="w-[150px] shadow" />
             </div>
         </div>
     )

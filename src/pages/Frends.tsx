@@ -1,6 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import ReferralShare from "./../components/ReferralShare";
-
+import pkg from "/package.json";
 const FrendsPage = () => {
+  const LS_DATA = JSON.parse(localStorage.getItem('user_data'))
+  console.log("LSSSS", LS_DATA);
+
+  const user_id = LS_DATA.user_id;
+  const LinkReffMApp = pkg.t_link_bot + "?startapp=" + user_id
+  const LinkBTN = "http://t.me/share/url?url=" + "%F0%9F%8E%81Get+5%2C000+TON+reward+points+by+inviting+your+friends+to+%40TonCakeSwap%3A%0D%0A" + LinkReffMApp
+
   const userLevel = [
     {
       level: 1,
@@ -29,7 +37,7 @@ const FrendsPage = () => {
       <h1 className="mb-2 text-gray-200 text-lg font-semibold ">
         Reffrall Frend
       </h1>
-      <ReferralShare />
+      <ReferralShare linkBtn={LinkBTN} ReffLink={LinkReffMApp} />
       <div className="mx-3 p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <a href="#">
           <h5 className="mb-2 text-md font-bold dark:text-white">

@@ -35,7 +35,7 @@ CORS_ALLOW_HEADERS = [ '*' ]
 CORS_ORIGIN_WHITELIST = (
     'http://127.0.0.1:3000',
     'http://localhost:3000',
-    "https://engaged-gopher-desired.ngrok-free.app"
+    "https://tomcat-enabling-equally.ngrok-free.app"
 )
 
 # Application definition

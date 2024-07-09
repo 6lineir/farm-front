@@ -13,11 +13,13 @@ import SingPage from "./pages/SingPage";
 
 
 import LoadingPage from "./pages/Loading";
+import ErrorPage from "./pages/ErrorPage";
 
 import AppLayout from "./AppLayout";
 
 import NoPage from "./pages/NoPage";
 import NotDekstop from "./pages/NotDekstop"
+
 
 //LINK - init SDK Telegram Mini App
 WebApp.ready();
@@ -28,6 +30,9 @@ const BASE_URL = "http://127.0.0.1:8000";
 
 function App() {
   const [isLogin, setLogin] = useState(false);
+  const [isError, setError] = useState(false);
+  const [ErrorCODE, setErrorCODE] = useState("404");
+  const [ErrorMSG, setErrorMSG] = useState("Not Found");
   const [isLoading, setIsLoading] = useState(true);
   const [UserData, setUserData] = useState();
   const [ScoreData, setScoreData] = useState();
@@ -102,7 +107,7 @@ function App() {
           "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${LS_DATA.user_id}`
         },
-        data: LS_DATA
+        // data: LS_DATA
       }
       console.log(options);
 
@@ -111,6 +116,9 @@ function App() {
         .then(data => data)
         .catch(error => error)
       console.warn(res);
+      console.warn("RESSS");
+      
+
       // IF: //
       if (res.status == 200) {
         setLogin(true)
@@ -119,10 +127,12 @@ function App() {
       if (res.response.status == 401) {
         Sing_User() //!Info  Register User
       }
+      if (res.code == "ERR_NETWORK"){
+        setError(true)
+      }
       // E IF //
     }
     RequestGetAPI()
-
   }, []);
   // console.log(isLoading);
   //   if (isError == true) {
@@ -132,29 +142,30 @@ function App() {
     return <LoadingPage />
   } else {
     if (WebApp.platform !== "unknown") {
-      if (isLogin == true) {
-        return (
-          <>
-            <BrowserRouter>
-              <Routes>
-                <Route
-                  path="/"
-                  element={isLoading ? <LoadingPage /> : <AppLayout />}
-                >
-                  <Route index element={<HomePage username={WebApp.initDataUnsafe.user.username} />} />
-                  <Route path="airdrop" element={<AboutPage />} />
-                  <Route path="frend" element={<FrendsPage />} />
-                  <Route path="tasks" element={<TaskPage />} />
+      if (isError == false) {
+        if (isLogin == true) {
+          return (
+            <>
+              <BrowserRouter>
+                <Routes>
+                  <Route
+                    path="/"
+                    element={isLoading ? <LoadingPage /> : <AppLayout />}
+                  >
+                    <Route index element={<HomePage username={WebApp.initDataUnsafe.user.username} />} />
+                    <Route path="airdrop" element={<AboutPage />} />
+                    <Route path="frend" element={<FrendsPage />} />
+                    <Route path="tasks" element={<TaskPage />} />
 
-                  <Route path="*" element={<NoPage />} />
-                </Route>
-              </Routes>
-            </BrowserRouter>
-          </>
-        );
+                    <Route path="*" element={<NoPage />} />
+                  </Route>
+                </Routes>
+              </BrowserRouter>
+            </>
+          );
 
-      } else return <SingPage />
-
+        } else return <SingPage />
+      }else return <ErrorPage ecode={ErrorCODE} emsg="Not Found Page" />
     } else return <NotDekstop />;
 
     //////////////////////main.tsx// }

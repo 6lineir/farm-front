@@ -1,7 +1,9 @@
 {
   "name": "farm-front",
+  "verbose_name": "TonCakeSwap Farm",
   "private": true,
-  "version": "0.0.2-beta",
+  "version": "0.0.3-beta",
+  "t_link_bot": "https://t.me/toncakeswapbot/TAPP",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,6 +13,7 @@
     "server": "yarn run server/main.ts"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.50.1",
     "@twa-dev/sdk": "^7.0.0",
     "axios": "^1.7.2",
     "cors": "^2.8.5",
@@ -26,6 +29,7 @@
     "socket.io-client": "^4.7.5"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.50.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
